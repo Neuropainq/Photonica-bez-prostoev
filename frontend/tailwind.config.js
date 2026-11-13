@@ -12,9 +12,9 @@ export default {
           600: '#253159',
         },
         accent: {
-          DEFAULT: '#22d3ee',
-          dim: '#0e7490',
-          soft: '#67e8f9',
+          DEFAULT: '#e7ecf4',
+          dim: '#a9b4c6',
+          soft: '#ffffff',
         },
       },
       fontFamily: {
@@ -23,7 +23,7 @@ export default {
         mono: ['"JetBrains Mono"', 'Consolas', 'monospace'],
       },
       boxShadow: {
-        glow: '0 0 24px rgba(34, 211, 238, 0.15)',
+        glow: '0 8px 30px rgba(148, 163, 184, 0.08)',
       },
     },
   },

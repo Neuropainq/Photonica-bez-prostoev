@@ -258,7 +258,7 @@ export default function SearchPage() {
           )}
 
           {results.length === 0 ? (
-            <div className="card mt-6 border-dashed border-accent/30 bg-night-900/60 py-12 text-center">
+            <div className="card mt-6 border-dashed border-night-600 bg-night-900/60 py-12 text-center">
               <h2 className="text-xl font-bold text-white">Ничего не нашлось</h2>
               <p className="mx-auto mt-3 max-w-md text-sm text-slate-400">
                 В публичных источниках по этому запросу пусто. Это как раз случай для нашей основной
@@ -270,15 +270,15 @@ export default function SearchPage() {
             </div>
           ) : (
             <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-              {results.map((p) => (
-                <ProductCard key={p.id} product={p} />
+              {results.map((p, i) => (
+                <ProductCard key={p.id} product={p} index={i} />
               ))}
             </div>
           )}
 
           {/* Мостик к инженеру (гибрид: поиск + ручная проверка) */}
           {results.length > 0 && (
-            <div className="card mt-8 flex flex-col items-start justify-between gap-4 border-accent/25 sm:flex-row sm:items-center">
+            <div className="card mt-8 flex flex-col items-start justify-between gap-4 border-night-600 sm:flex-row sm:items-center">
               <div>
                 <h2 className="text-base font-bold text-white">
                   Не уверены в совместимости замены?

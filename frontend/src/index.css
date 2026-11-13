@@ -2,70 +2,88 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @layer base {
   html {
     @apply scroll-smooth;
   }
   body {
-    @apply bg-night-950 text-slate-200 font-sans antialiased;
+    @apply bg-night-950 text-slate-300 font-sans antialiased;
   }
   ::selection {
-    @apply bg-accent/30 text-white;
+    @apply bg-white/20 text-white;
   }
   h1,
   h2,
   h3 {
     @apply font-display tracking-tight;
   }
+
+  /* Плавный вход блоков; для тех, кто просит меньше движения — отключаем */
+  .anim-fade-up {
+    animation: fade-up 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .anim-fade-up {
+      animation: none;
+    }
+    * {
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-night-950 transition hover:bg-accent-soft hover:shadow-glow focus:outline-none focus:ring-2 focus:ring-accent/50;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-night-950 transition duration-200 hover:bg-accent-soft active:translate-y-px focus:outline-none focus:ring-2 focus:ring-white/30;
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-night-600 bg-night-800 px-5 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-accent/50 hover:text-accent-soft focus:outline-none focus:ring-2 focus:ring-accent/30;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-night-600 bg-night-800/60 px-5 py-2.5 text-sm font-semibold text-slate-300 transition duration-200 hover:border-slate-500 hover:text-white active:translate-y-px focus:outline-none focus:ring-2 focus:ring-white/20;
   }
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-slate-400 transition hover:bg-night-800 hover:text-white;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-slate-400 transition duration-200 hover:bg-night-800 hover:text-white;
   }
   .card {
     @apply rounded-xl border border-night-700 bg-night-900 p-6;
   }
   .card-hover {
-    @apply transition duration-200 hover:border-accent/40 hover:bg-night-800 hover:shadow-glow;
+    @apply transition duration-300 ease-out hover:-translate-y-1 hover:border-night-600 hover:bg-night-800/70;
   }
   .input {
-    @apply w-full rounded-lg border border-night-600 bg-night-800 px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/50;
+    @apply w-full rounded-lg border border-night-600 bg-night-800 px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 transition duration-200 focus:border-slate-400 focus:outline-none focus:ring-1 focus:ring-white/20;
   }
   .section-title {
     @apply text-2xl font-bold text-white sm:text-3xl;
   }
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] text-accent;
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-slate-400;
   }
   .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-night-600 bg-night-800 px-3.5 py-1.5 text-xs font-medium text-slate-300 transition hover:border-accent/50 hover:text-accent-soft focus:outline-none focus:ring-2 focus:ring-accent/40;
+    @apply inline-flex items-center gap-1.5 rounded-full border border-night-600 bg-night-800/50 px-3.5 py-1.5 text-xs font-medium text-slate-400 transition duration-200 hover:border-slate-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/20;
   }
   .badge {
     @apply inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-semibold;
   }
-  /* Спектральная полоса — фирменный элемент: тонкий луч света */
+  /* Спектральная полоса — фирменный элемент, используется дозировано и приглушённо */
   .spectrum-line {
     background: linear-gradient(
       90deg,
-      #7c3aed 0%,
-      #3b82f6 22%,
-      #22d3ee 45%,
-      #34d399 68%,
-      #fbbf24 90%,
+      rgba(124, 58, 237, 0.55) 0%,
+      rgba(59, 130, 246, 0.55) 22%,
+      rgba(148, 163, 184, 0.6) 45%,
+      rgba(52, 211, 153, 0.5) 68%,
+      rgba(251, 191, 36, 0.45) 90%,
       transparent 100%
     );
-  }
-  .text-spectrum {
-    background: linear-gradient(90deg, #67e8f9 0%, #34d399 55%, #fbbf24 110%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
   }
 }

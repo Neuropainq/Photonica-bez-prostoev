@@ -65,7 +65,7 @@ export default function PricingPage() {
             <div
               key={plan.name}
               className={`card relative flex flex-col ${
-                plan.highlighted ? 'border-accent/50 shadow-glow lg:-translate-y-3' : ''
+                plan.highlighted ? 'border-white/30 lg:-translate-y-3' : ''
               }`}
             >
               {plan.highlighted && (
@@ -80,7 +80,7 @@ export default function PricingPage() {
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5 text-sm text-slate-300">
                     <svg
-                      className="mt-0.5 h-4 w-4 shrink-0 text-accent"
+                      className="mt-0.5 h-4 w-4 shrink-0 text-slate-400"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"

@@ -16,14 +16,14 @@ function band(w: [number, number]): { left: string; width: string } | null {
 }
 
 const availabilityStyles: Record<Product['availability'], string> = {
-  stock: 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30',
-  'under-order': 'bg-amber-500/10 text-amber-300 border border-amber-500/30',
+  stock: 'border border-emerald-400/25 bg-emerald-400/10 text-emerald-200/90',
+  'under-order': 'border border-amber-400/20 bg-amber-400/10 text-amber-200/80',
 }
 
 const confidenceStyles: Record<NonNullable<Product['confidence']>, string> = {
-  tested: 'bg-accent/15 text-accent-soft border border-accent/40',
-  documented: 'bg-slate-500/10 text-slate-300 border border-slate-500/30',
-  candidate: 'bg-slate-500/10 text-slate-400 border border-slate-500/30',
+  tested: 'border border-white/25 bg-white/10 text-slate-100',
+  documented: 'border border-night-600 bg-night-800 text-slate-300',
+  candidate: 'border border-night-700 bg-night-800/60 text-slate-500',
 }
 
 const confidenceRank: Record<NonNullable<Product['confidence']>, number> = {
@@ -36,18 +36,21 @@ interface ProductCardProps {
   product: Product
   /** Подсвечивать карточки проверенных аналогов */
   highlightVerified?: boolean
+  /** Позиция в списке — для каскадного появления */
+  index?: number
 }
 
-export function ProductCard({ product, highlightVerified = true }: ProductCardProps) {
+export function ProductCard({ product, highlightVerified = true, index = 0 }: ProductCardProps) {
   const b = band(product.wavelength)
   return (
     <article
-      className={`card card-hover flex flex-col !p-5 ${
-        highlightVerified && product.confidence === 'tested' ? 'border-accent/40' : ''
+      style={{ animationDelay: `${Math.min(index * 45, 250)}ms` }}
+      className={`card card-hover anim-fade-up flex flex-col !p-5 ${
+        highlightVerified && product.confidence === 'tested' ? 'border-white/25' : ''
       }`}
     >
       <div className="flex items-start justify-between gap-3">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-night-600 bg-night-800 text-slate-300">
           <CategoryIcon category={product.category} className="h-5 w-5" />
         </span>
         <span className={`badge rounded-full ${availabilityStyles[product.availability]}`}>
@@ -78,13 +81,13 @@ export function ProductCard({ product, highlightVerified = true }: ProductCardPr
 
       {b && (
         <div className="mt-3">
-          <div className="spectrum-line relative h-1.5 rounded-full bg-night-700">
+          <div className="spectrum-line relative h-1.5 rounded-full bg-night-700 opacity-70">
             <span
-              className="absolute top-1/2 h-3 w-0.5 -translate-y-1/2 rounded bg-white shadow-glow"
+              className="absolute top-1/2 h-3 w-0.5 -translate-y-1/2 rounded bg-white/90"
               style={{ left: b.left }}
             />
             <span
-              className="absolute top-1/2 h-3 w-0.5 -translate-y-1/2 rounded bg-white shadow-glow"
+              className="absolute top-1/2 h-3 w-0.5 -translate-y-1/2 rounded bg-white/90"
               style={{ left: `calc(${b.left} + ${b.width})` }}
             />
           </div>
