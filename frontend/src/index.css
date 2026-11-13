@@ -9,22 +9,63 @@
   body {
     @apply bg-night-950 text-slate-200 font-sans antialiased;
   }
+  ::selection {
+    @apply bg-accent/30 text-white;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-night-950 transition hover:bg-accent-soft focus:outline-none focus:ring-2 focus:ring-accent/50;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-night-950 transition hover:bg-accent-soft hover:shadow-glow focus:outline-none focus:ring-2 focus:ring-accent/50;
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-night-600 bg-night-800 px-5 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-accent/50 hover:text-accent-soft;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-night-600 bg-night-800 px-5 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-accent/50 hover:text-accent-soft focus:outline-none focus:ring-2 focus:ring-accent/30;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-slate-400 transition hover:bg-night-800 hover:text-white;
   }
   .card {
     @apply rounded-xl border border-night-700 bg-night-900 p-6;
+  }
+  .card-hover {
+    @apply transition duration-200 hover:border-accent/40 hover:bg-night-800 hover:shadow-glow;
   }
   .input {
     @apply w-full rounded-lg border border-night-600 bg-night-800 px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/50;
   }
   .section-title {
     @apply text-2xl font-bold text-white sm:text-3xl;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-accent;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-night-600 bg-night-800 px-3.5 py-1.5 text-xs font-medium text-slate-300 transition hover:border-accent/50 hover:text-accent-soft focus:outline-none focus:ring-2 focus:ring-accent/40;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-semibold;
+  }
+  /* Спектральная полоса — фирменный элемент: тонкий луч света */
+  .spectrum-line {
+    background: linear-gradient(
+      90deg,
+      #7c3aed 0%,
+      #3b82f6 22%,
+      #22d3ee 45%,
+      #34d399 68%,
+      #fbbf24 90%,
+      transparent 100%
+    );
+  }
+  .text-spectrum {
+    background: linear-gradient(90deg, #67e8f9 0%, #34d399 55%, #fbbf24 110%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 }

@@ -1,8 +1,9 @@
 import { Link, NavLink } from 'react-router-dom'
 
 const navItems = [
-  { to: '/', label: 'Главная' },
+  { to: '/search', label: 'Поиск' },
   { to: '/how-it-works', label: 'Как мы работаем' },
+  { to: '/pricing', label: 'Подписка' },
 ]
 
 export default function Header() {
@@ -26,7 +27,6 @@ export default function Header() {
             <NavLink
               key={item.to}
               to={item.to}
-              end={item.to === '/'}
               className={({ isActive }) =>
                 `text-sm transition ${isActive ? 'text-accent' : 'text-slate-400 hover:text-white'}`
               }
